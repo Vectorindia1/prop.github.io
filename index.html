@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Dealer Directory</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            margin-top: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        #dealerList {
+            width: 100%;
+            max-width: 600px;
+            margin-top: 20px;
+        }
+
+        .dealer {
+            background-color: #fff;
+            margin-bottom: 15px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .dealer:hover {
+            transform: scale(1.02);
+            box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .dealer p {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .dealer p strong {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <h1>Property Dealer Directory</h1>
+    <input type="text" id="stateInput" placeholder="Enter state name" onkeyup="filterDealers()">
+    <div id="dealerList"></div>
+
+    <script>
+        const dealers = [
+            { name: 'Amit Sharma', email: 'amit@example.com', number: '9876543210', state: 'Maharashtra' },
+            { name: 'Rajesh Kumar', email: 'rajesh@example.com', number: '9876543211', state: 'Maharashtra' },
+            { name: 'Sunita Verma', email: 'sunita@example.com', number: '9876543212', state: 'Karnataka' },
+            { name: 'Ravi Patel', email: 'ravi@example.com', number: '9876543213', state: 'Karnataka' },
+            { name: 'Priya Desai', email: 'priya@example.com', number: '9876543214', state: 'Tamil Nadu' },
+            { name: 'Arjun Reddy', email: 'arjun@example.com', number: '9876543215', state: 'Tamil Nadu' },
+            { name: 'Sneha Singh', email: 'sneha@example.com', number: '9876543216', state: 'Uttar Pradesh' },
+            { name: 'Anil Gupta', email: 'anil@example.com', number: '9876543217', state: 'Uttar Pradesh' },
+            { name: 'Kavita Rao', email: 'kavita@example.com', number: '9876543218', state: 'Rajasthan' },
+            { name: 'Manish Sharma', email: 'manish@example.com', number: '9876543219', state: 'Rajasthan' },
+            { name: 'Neha Agarwal', email: 'neha@example.com', number: '9876543220', state: 'West Bengal' },
+            { name: 'Ashok Sen', email: 'ashok@example.com', number: '9876543221', state: 'West Bengal' },
+            { name: 'Vikas Mehta', email: 'vikas@example.com', number: '9876543222', state: 'Punjab' },
+            { name: 'Deepak Singh', email: 'deepak@example.com', number: '9876543223', state: 'Punjab' },
+            { name: 'Rita Malhotra', email: 'rita@example.com', number: '9876543224', state: 'Haryana' },
+            { name: 'Sandeep Khanna', email: 'sandeep@example.com', number: '9876543225', state: 'Haryana' },
+            { name: 'Pooja Joshi', email: 'pooja@example.com', number: '9876543226', state: 'Gujarat' },
+            { name: 'Rohit Shah', email: 'rohit@example.com', number: '9876543227', state: 'Gujarat' },
+            { name: 'Anjali Kapoor', email: 'anjali@example.com', number: '9876543228', state: 'Delhi' },
+            { name: 'Vivek Agarwal', email: 'vivek@example.com', number: '9876543229', state: 'Delhi' }
+        ];
+
+        function filterDealers() {
+            const stateInput = document.getElementById('stateInput').value.toLowerCase();
+            const filteredDealers = dealers.filter(dealer => dealer.state.toLowerCase().includes(stateInput));
+            displayDealers(filteredDealers);
+        }
+
+        function displayDealers(dealers) {
+            const dealerList = document.getElementById('dealerList');
+            dealerList.innerHTML = '';
+
+            if (dealers.length === 0) {
+                dealerList.innerHTML = '<p>No property dealers found for the specified state.</p>';
+            } else {
+                dealers.forEach(dealer => {
+                    const dealerDiv = document.createElement('div');
+                    dealerDiv.classList.add('dealer');
+                    dealerDiv.innerHTML = `
+                        <p><strong>Name:</strong> ${dealer.name}</p>
+                        <p><strong>Email:</strong> ${dealer.email}</p>
+                        <p><strong>Number:</strong> ${dealer.number}</p>
+                        <p><strong>State:</strong> ${dealer.state}</p>
+                    `;
+                    dealerList.appendChild(dealerDiv);
+                });
+            }
+        }
+
+        window.onload = () => {
+            displayDealers(dealers);
+        };
+    </script>
+</body>
+</html>
